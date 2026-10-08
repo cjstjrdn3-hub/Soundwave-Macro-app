@@ -29,7 +29,11 @@ def to_excel_bytes(df_dict):
             df.to_excel(writer, sheet_name=sheet_name, index=False)
     return output.getvalue()
 
-# 실행 버튼 클릭 시 동작
+# 파일 선택 전 안내문 표시
+if not (file_latest and file_past and file_order and file_master):
+    st.info("👈 왼쪽 사이드바에서 4개의 원본 엑셀 파일을 모두 업로드해 주세요.")
+
+# 실행 버튼 클릭 시 동작 (안전한 실행 분기)
 if st.sidebar.button("🚀 데이터 자동 가공 시작", type="primary"):
     if not (file_latest and file_past and file_order and file_master):
         st.error("❌ 4개의 원본 엑셀 파일을 모두 업로드해 주세요.")
